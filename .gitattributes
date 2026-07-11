@@ -1,0 +1,4 @@
+* text=auto eol=lf
+frontend/package-lock.json linguist-generated
+backend/poetry.lock linguist-generated
+fixtures/map_data/** linguist-generated

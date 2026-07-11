@@ -1,0 +1,12 @@
+{
+  "parsed_intent": "Summon a dangerous winged predator.",
+  "plausibility": "grounded_supernatural",
+  "materialized_effect": {
+    "type": "entity",
+    "species": "dragon"
+  },
+  "first_consequence": {
+    "happiness": -8,
+    "food": -10
+  }
+}
