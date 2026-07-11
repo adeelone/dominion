@@ -50,7 +50,7 @@ main {
   padding: 14px;
 }
 
-.mapPane, .commandPane, .settlementPanel, .omenLog, .chronicle {
+.mapPane, .commandPane, .settlementPanel, .omenLog, .chronicle, .modeDetails {
   background: #fffaf0;
   border: 1px solid #d4c7ae;
   border-radius: 8px;
@@ -150,7 +150,7 @@ textarea {
 .buttonRow { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 8px; }
 .buttonRow button { border-color: #cfc4ae; color: #263238; background: #f8f3e8; }
 
-.settlementPanel, .omenLog, .chronicle { padding: 12px; overflow: auto; }
+.settlementPanel, .omenLog, .chronicle, .modeDetails { padding: 12px; overflow: auto; }
 .settlementPanel { display: grid; gap: 8px; }
 .settlementRow {
   display: grid;
@@ -177,6 +177,8 @@ meter { width: 100%; }
 .omen p { margin: 3px 0 0; color: #2a363b; font-size: 13px; line-height: 1.35; }
 
 .chronicle { grid-column: 1 / -1; }
+.modeDetails { grid-column: 1 / -1; }
+.modeDetails p { margin: 8px 0; line-height: 1.4; color: #2a363b; }
 .chronicle article {
   display: grid;
   grid-template-columns: 150px 1fr;

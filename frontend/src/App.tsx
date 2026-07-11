@@ -1,4 +1,4 @@
-import { ChevronRight, Crown, Globe2, Hammer, Landmark, ScrollText, ShieldAlert, Sparkles } from 'lucide-react';
+import { ChevronRight, Crown, Download, Globe2, Hammer, Landmark, ScrollText, ShieldAlert, Sparkles } from 'lucide-react';
 import { useState } from 'react';
 import { useDominion } from './store';
 
@@ -102,6 +102,63 @@ function SettlementPanel() {
   );
 }
 
+function ModeDetails() {
+  const mode = useDominion((state) => state.mode);
+  const exportWorld = useDominion((state) => state.exportWorld);
+  const reportWorld = useDominion((state) => state.reportWorld);
+  const chancellor = 'Watch food pressure in Bellroot and use the river guard decree before the next drought tick.';
+  if (mode === 'World Forge') {
+    return (
+      <section className="modeDetails">
+        <h2><Hammer size={18} /> World Forge</h2>
+        <p>Briefing: river kingdom, mountain clans, coastal traders, unstable omens.</p>
+        <p>Logic: high magic, late bronze, dragons and prophets permitted.</p>
+        <div className="buttonRow">
+          <button>Tag settlement</button>
+          <button>Publish draft</button>
+        </div>
+      </section>
+    );
+  }
+  if (mode === 'Community') {
+    return (
+      <section className="modeDetails">
+        <h2><Globe2 size={18} /> Community</h2>
+        <p>Crown Basin High Magic v1 is ready to copy or report.</p>
+        <div className="buttonRow">
+          <button onClick={() => navigator.clipboard?.writeText(exportWorld())}><Download size={16} /> Export JSON</button>
+          <button onClick={reportWorld}>Report world</button>
+        </div>
+      </section>
+    );
+  }
+  if (mode === 'Throne') {
+    return (
+      <section className="modeDetails">
+        <h2><Crown size={18} /> Chancellor</h2>
+        <p>{chancellor}</p>
+        <p>Estimated decree cost: 2 credits. Deep simulation: 5 credits.</p>
+      </section>
+    );
+  }
+  if (mode === 'Providence') {
+    return (
+      <section className="modeDetails">
+        <h2><Sparkles size={18} /> Divine Tools</h2>
+        <p>Blessing magnitude is bounded. Disasters and free-form acts land through the same chronicle projection.</p>
+        <p>Every free-form act writes parsed intent, plausibility, materialization, and first consequence.</p>
+      </section>
+    );
+  }
+  return (
+    <section className="modeDetails">
+      <h2><Landmark size={18} /> Dashboard</h2>
+      <p>Active world: The Crown Basin. Last played: today. Branch: primary timeline.</p>
+      <p>Shared activity feed and permissions are modeled in backend contracts and need production persistence.</p>
+    </section>
+  );
+}
+
 function OmenLog() {
   const omenTrail = useDominion((state) => state.omenTrail);
   return (
@@ -143,6 +200,7 @@ export function App() {
         <CommandPanel />
         <SettlementPanel />
         <OmenLog />
+        <ModeDetails />
         <Chronicle />
       </main>
     </div>

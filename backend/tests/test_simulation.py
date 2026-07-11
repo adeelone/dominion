@@ -1,4 +1,5 @@
 from backend.app.providence.blessings_curses import BlessingCurseService, MAX_MAGNITUDE
+from backend.app.worldmind.client import WorldMind
 from backend.app.simulation.archive_engine import ArchiveEngine
 from backend.app.simulation.chronicle_log import ChronicleLog
 from backend.app.simulation.clock import Clock
@@ -49,3 +50,11 @@ def test_blessing_magnitude_is_bounded() -> None:
     BlessingCurseService().apply(world, "s1", "fertility", 99, True)
     projected = StateProjection().project(world)
     assert projected.settlements["s1"].food == world.settlements["s1"].food + MAX_MAGNITUDE
+
+
+def test_worldmind_records_token_and_credit_accounting() -> None:
+    worldmind = WorldMind()
+    response = worldmind.complete("archive", "compress these events", tier="deep")
+    assert response.cost_credits == 5
+    assert worldmind.calls[0].tokens_in == 3
+    assert worldmind.calls[0].purpose == "archive"

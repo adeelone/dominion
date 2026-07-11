@@ -10,3 +10,8 @@ class CommandRequest(BaseModel):
 
 class AdvanceRequest(BaseModel):
     amount: int | str
+
+
+class ReportRequest(BaseModel):
+    world_id: str
+    reason: str

@@ -23,6 +23,8 @@ type DominionState = {
   castAct: (text: string) => void;
   bless: () => void;
   disaster: () => void;
+  exportWorld: () => string;
+  reportWorld: () => void;
 };
 
 export const useDominion = create<DominionState>((set, get) => ({
@@ -86,6 +88,26 @@ export const useDominion = create<DominionState>((set, get) => ({
       ),
       chronicle: [
         { id: crypto.randomUUID(), tick: state.chronicle.length + 1, kind: 'disaster', actor: 'providence', text: 'A drought bites into the granaries.' },
+        ...state.chronicle,
+      ],
+    })),
+  exportWorld: () => {
+    const state = get();
+    return JSON.stringify(
+      {
+        settlements: state.settlements,
+        chronicle: state.chronicle,
+        omenTrail: state.omenTrail,
+        balance: state.balance,
+      },
+      null,
+      2,
+    );
+  },
+  reportWorld: () =>
+    set((state) => ({
+      chronicle: [
+        { id: crypto.randomUUID(), tick: state.chronicle.length + 1, kind: 'moderation', actor: 'review', text: 'World report queued for admin review.' },
         ...state.chronicle,
       ],
     })),
