@@ -5,6 +5,17 @@ from dataclasses import replace
 from .models import EventKind, Settlement, World
 
 
+def _as_int(value: object, default: int = 0) -> int:
+    if isinstance(value, int):
+        return value
+    if isinstance(value, str):
+        try:
+            return int(value)
+        except ValueError:
+            return default
+    return default
+
+
 class StateProjection:
     def project(self, world: World) -> World:
         projected = World(
@@ -40,8 +51,8 @@ class StateProjection:
         polity = world.polities.get(polity_id)
         if polity is None:
             return
-        treasury_delta = int(payload.get("treasury_delta", 0))
-        army_delta = int(payload.get("army_delta", 0))
+        treasury_delta = _as_int(payload.get("treasury_delta", 0))
+        army_delta = _as_int(payload.get("army_delta", 0))
         world.polities[polity_id] = replace(
             polity,
             treasury=max(0, polity.treasury + treasury_delta),
@@ -51,8 +62,8 @@ class StateProjection:
     def _with_deltas(self, settlement: Settlement, deltas: dict[object, object]) -> Settlement:
         return replace(
             settlement,
-            population=max(0, settlement.population + int(deltas.get("population", 0))),
-            happiness=max(0, min(100, settlement.happiness + int(deltas.get("happiness", 0)))),
-            food=max(0, settlement.food + int(deltas.get("food", 0))),
-            culture=max(0, settlement.culture + int(deltas.get("culture", 0))),
+            population=max(0, settlement.population + _as_int(deltas.get("population", 0))),
+            happiness=max(0, min(100, settlement.happiness + _as_int(deltas.get("happiness", 0)))),
+            food=max(0, settlement.food + _as_int(deltas.get("food", 0))),
+            culture=max(0, settlement.culture + _as_int(deltas.get("culture", 0))),
         )

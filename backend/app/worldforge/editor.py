@@ -2,7 +2,7 @@ from __future__ import annotations
 
 from dataclasses import replace
 
-from backend.app.simulation.models import MagicTier, Region, Settlement, World, WorldLogic
+from backend.app.simulation.models import MagicTier, Region, World, WorldLogic
 
 
 class WorldForge:
