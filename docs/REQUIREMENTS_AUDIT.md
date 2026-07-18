@@ -8,8 +8,8 @@ This audit uses the original Dominion prompt as the source of truth. The current
 
 | Status | Count |
 | --- | ---: |
-| PASS | 20 |
-| PARTIAL | 30 |
+| PASS | 21 |
+| PARTIAL | 29 |
 | FAIL | 9 |
 
 ## Findings
@@ -62,11 +62,16 @@ This audit uses the original Dominion prompt as the source of truth. The current
 | Moderation on decrees, diplomacy, divine acts, published worlds | PARTIAL | Decrees/divine/blessing/disaster/report routes check moderation; diplomacy/publish flow missing. |
 | Safety documentation | PASS | `SAFETY.md`. |
 | In-app reporting/admin review queue | PARTIAL | Report endpoint and UI action exist; admin UI is missing. |
-| Stack and repo layout | PASS | FastAPI, Vite/React, Docker, Makefile, docs, GitHub workflows. |
+| Stack and repo layout | PASS | FastAPI, Vite/React, Docker, frontend/backend container targets, Makefile, docs, GitHub workflows. |
+| Production CORS configuration | PASS | `BACKEND_CORS_ORIGINS` config and backend config tests. |
 | Recorded LLM fixtures, unit, integration, E2E tests | PARTIAL | Grounding/unit/E2E tests exist; broader integration matrix is incomplete. |
 
 ## Fixed In This Pass
 
+- Added configurable backend CORS through `BACKEND_CORS_ORIGINS`.
+- Added a frontend production Dockerfile and compose service.
+- Added deployment documentation covering required production env values.
+- Added frontend ESLint config for the existing `npm run lint` and `make lint` scripts.
 - Added input moderation to backend decree, divine act, blessing, disaster, and report routes.
 - Added JSON export for the demo world projection and chronicle.
 - Added WorldMind token/cost call accounting.

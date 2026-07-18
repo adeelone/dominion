@@ -25,6 +25,7 @@ docker compose -f infra/docker-compose.yml up --build
 
 Frontend: `http://localhost:5173`  
 Backend: `http://localhost:8000`
+Health check: `http://localhost:8000/health`
 
 ## Core Flows
 
@@ -55,6 +56,8 @@ make format
 ## Environment
 
 Copy `.env.example` to `.env` and set provider keys only for live WorldMind calls. Tests do not require live LLM credentials.
+
+For production deployment settings, see `DEPLOYMENT.md`.
 
 ## Screenshots
 
