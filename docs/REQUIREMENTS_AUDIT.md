@@ -1,6 +1,6 @@
 # Requirements Audit
 
-Source: `C:\Users\adeem\Downloads\dominion-codex-prompt.md`
+Source: `dominion-codex-prompt.md`
 
 This audit uses the original Dominion prompt as the source of truth. The current repository is a working vertical slice, not a complete production game.
 
